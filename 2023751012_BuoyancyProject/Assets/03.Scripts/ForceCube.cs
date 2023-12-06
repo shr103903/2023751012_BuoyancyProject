@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Á¤À°¸éÃ¼
+// ì •ìœ¡ë©´ì²´
 public class ForceCube : Force
 {
     private Rigidbody rigid = null;
@@ -25,7 +25,7 @@ public class ForceCube : Force
         float waterHeight = Wave.instance.GetOrSetHeight(transform.position.x, transform.position.z);
         float submergedHeight = 0;
 
-        // ÀÏºÎ°¡ Àá±ä »óÅÂ
+        // ì¼ë¶€ê°€ ì ê¸´ ìƒíƒœ
         if (Mathf.Abs(waterHeight - transform.position.y) < transform.lossyScale.y * 0.5f)
         {
             if (waterHeight < transform.position.y)
@@ -37,12 +37,12 @@ public class ForceCube : Force
                 submergedHeight = transform.lossyScale.y * 0.5f + (waterHeight - transform.position.y);
             }
         }
-        // ¾È Àá±ä »óÅÂ
+        // ì•ˆ ì ê¸´ ìƒíƒœ
         else if(waterHeight < transform.position.y)
         {
             submergedHeight = 0;
         }
-        //¿ÏÀüÈ÷ Àá±ä »óÅÂ
+        //ì™„ì „íˆ ì ê¸´ ìƒíƒœ
         else
         {
             submergedHeight = transform.lossyScale.y;

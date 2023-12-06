@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// ±¸
+// êµ¬
 public class ForceSphere : Force
 {
     private Rigidbody rigid = null;
@@ -26,32 +26,32 @@ public class ForceSphere : Force
     {
         float waterHeight = Wave.instance.GetOrSetHeight(transform.position.x, transform.position.z);
 
-        // ÀÏºÎ°¡ Àá±ä »óÅÂ
+        // ì¼ë¶€ê°€ ì ê¸´ ìƒíƒœ
         if (Mathf.Abs(waterHeight - transform.position.y) < transform.lossyScale.y * 0.5f)
         {
-            // ±¸ Áß½É¿¡¼­ ¹° Ç¥¸é±îÁöÀÇ °Å¸®
+            // êµ¬ ì¤‘ì‹¬ì—ì„œ ë¬¼ í‘œë©´ê¹Œì§€ì˜ ê±°ë¦¬
             float surfacedistance = waterHeight - transform.position.y;
 
             radius = GetRadius();
-            // ±¸ÀÇ Áß½É ³ôÀÌ < ¹° Ç¥¸é ³ôÀÌ
+            // êµ¬ì˜ ì¤‘ì‹¬ ë†’ì´ < ë¬¼ í‘œë©´ ë†’ì´
             if (surfacedistance >= 0)
             {
-                // (±¸ ºÎÇÇ) - (Àß¸° ±¸ÀÇ ÀÛÀº ºÎºĞ ºÎÇÇ)
+                // (êµ¬ ë¶€í”¼) - (ì˜ë¦° êµ¬ì˜ ì‘ì€ ë¶€ë¶„ ë¶€í”¼)
                 return GetSphereVolume(radius) - GetCutSphereVolume(radius, surfacedistance);
             }
-            // ±¸ÀÇ Áß½É ³ôÀÌ > ¹° Ç¥¸é ³ôÀÌ
+            // êµ¬ì˜ ì¤‘ì‹¬ ë†’ì´ > ë¬¼ í‘œë©´ ë†’ì´
             else
             {
-                // Àß¸° ±¸ÀÇ ÀÛÀº ºÎºĞ ºÎÇÇ
+                // ì˜ë¦° êµ¬ì˜ ì‘ì€ ë¶€ë¶„ ë¶€í”¼
                 return GetCutSphereVolume(radius, -surfacedistance);
             }
         }
-        // ¾È Àá±ä »óÅÂ
+        // ì•ˆ ì ê¸´ ìƒíƒœ
         else if (waterHeight < transform.position.y)
         {
             return 0;
         }
-        //¿ÏÀüÈ÷ Àá±ä »óÅÂ
+        //ì™„ì „íˆ ì ê¸´ ìƒíƒœ
         else
         {
             radius = GetRadius();
@@ -64,13 +64,13 @@ public class ForceSphere : Force
         return transform.lossyScale.x * 0.5f;
     }
 
-    // ±¸ÀÇ ºÎÇÇ
+    // êµ¬ì˜ ë¶€í”¼
     private float GetSphereVolume(float radius)
     {
         return (4 * Mathf.PI * radius * radius * radius) / 3;
     }
 
-    // Æò¸éÀ¸·Î Àß·ÁÁø ±¸ÀÇ ÀÛÀº ºÎºĞ ºÎÇÇ
+    // í‰ë©´ìœ¼ë¡œ ì˜ë ¤ì§„ êµ¬ì˜ ì‘ì€ ë¶€ë¶„ ë¶€í”¼
     private float GetCutSphereVolume(float radius, float surfacedistance)
     {
         float curRadius = Mathf.Sqrt(radius * radius - surfacedistance * surfacedistance);
